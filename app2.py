@@ -47,3 +47,21 @@ async def read_user(
 async def get_users():
     users = ["Dima", "Diana"]
     return users
+
+
+@app.post("/users/add")
+async def add_user(
+    name: str = Query(..., title="Ім'я нового користувача"),
+    email: Optional[str] = Query(None, title="Email нового користувача")
+) -> dict:
+    users = [{"id": 1, "name": "Dima", "email": "dima@example.com"}]
+    new_id = users + 1
+    new_user = {"id": new_id, "name": name, "email": email}
+    users.append(new_user)
+    return new_user
+
+
+@app.get("/orders/{order_id}")
+async def get_order(order_id: int = Path(..., title="Ідентифікатор замовлення")
+) -> dict:
+    return {"order_id": order_id}

@@ -6,17 +6,15 @@ app = FastAPI()
 d_values = {"key": "values"}
 
 
-@app.get("/get_method/{key}")
-def get_method(key: str):
-    value = d_values.get(key, "default_value")
-    return {"values": value}
+@app.get("/")
+async def hello():
+    return {"value": d_values}
 
 
-@app.post("/post_method/")
-async def post_method(data: dict[str, str]):
-    key = data.get("key")
-    value = data.get("value")
-    return {"key": key, "value": value}
+@app.post('/add')
+async def add_to_post(key: str, value: str):
+    d_values[key] = value
+    return {'message': 'Елемент успішно додано до словника'}
 
 
 @app.put("/change_dict/{key3}/{value1}")
