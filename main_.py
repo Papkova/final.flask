@@ -20,7 +20,7 @@ async def add_to_post(key: str, value: str):
 @app.put("/change_dict/{key3}/{value1}")
 def test(key: str, value: str):
     if key in d_values:
-        d_values[key] = value
+        d_values[key] =+ value
         return d_values
     else:
         return {"message": "Key not found"}
